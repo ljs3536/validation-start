@@ -197,3 +197,7 @@ MessageCodesResolver는 required.item.itemName처럼 구체적인 것을 먼저 
 스프링은 타입 오류가 발생하면 typeMismatch라는 오류 코드를 사용한다.
 이 오류코드가 MessageCodesResolver를 통하면서 4가지 메시지 코드가 생성된다.
 
+# /24-11-06
+
+## Validator 분리1
+
