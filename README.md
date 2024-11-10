@@ -201,3 +201,29 @@ MessageCodesResolver는 required.item.itemName처럼 구체적인 것을 먼저 
 
 ## Validator 분리1
 
+# /24-11-10
+
+## Validator 분리2
+
+### WebDataBinder를 통해서 사용하기
+
+### @Validated 적용
+@Validated는 검증기를 실행하라는 애노테이션이다.
+이 애노테이션이 붙으면 앞서 WebDataBinder에 등록한 검증기를 찾아서 실행한다.
+그런데 여러 검증기를 등록한다면 그 중에 어떤 검증기가 실행되어야 할지 구분이 필요하다.
+이때 supports()가 사용된다. 
+여기서는 supports(Item.class)가 호출되고, 결과가 true이므로 ItemValidator의 validate()가 호출된다.
+
+### 글로벌 설정 - 모든 컨트롤러에 다 적용
+implements WebMvcConfigurer
+public Validator getValidator(){}
+기존 컨트롤러의 @InitBinder를 제거해도 글로벌 설정으로 정상 동작하는 것을 확인할 수 있다.
+
+### 주의 
+글로벌 설정을 직접 사용하는 경우는 드물다.
+
+### 참고
+검증 시 @Validated @Valid 둘 다 사용가능하다.
+javax.validation.@Valid를 사용하려면 build.gradle 의존관계 추가가 필요하다.
+implementation 'org.springframework.boot:spring-boot-starter-validation'
+@Validated는 스프링 전용 검증 애노테이션이고, @Valid는 자바 표준 검증 애노테이션이다.
