@@ -227,3 +227,33 @@ public Validator getValidator(){}
 javax.validation.@Valid를 사용하려면 build.gradle 의존관계 추가가 필요하다.
 implementation 'org.springframework.boot:spring-boot-starter-validation'
 @Validated는 스프링 전용 검증 애노테이션이고, @Valid는 자바 표준 검증 애노테이션이다.
+
+# /24-11-11
+
+## Bean Validation - 소개
+검증 기능을 지금처럼 매번 코드로 작성하는 것은 상당히 번거롭다. 
+특히 특정 필드에 대한 검증 로직은 대부분 빈 값인지 아닌지, 특정 크기를 넘는지와 같이 매우 일반적인 로직이다.
+이런 검증 롲기을 모든 프로젝트에 적용할 수 있게 공통화하고, 표준화 한 것이 바로 Bean Validation이다.
+
+### Bean Validation이란?
+먼저 Bean Validation은 특정한 구현체가 아니라 Bean Validation이라는 기술 표준이다.
+쉽게 이야기해서 검증 애노테이션과 여러 인터페이스의 모음이다. 
+마치 JPA가 표준 기술이고 그 구현체로 하이버네이트가 있는것과 같다.
+
+BeanValidation을 구현한 기술중에 일반적으로 사용하는 구현체는 하이버네이트 Validator이다.
+이름이 하이버네이트가 붙어서 그렇지 ORM과 관련이 없다.
+
+
+## Bean Validation - 시작
+
+### Bean Validation 의존 관계 추가
+
+### 검증 애노테이션
+- @NotNull : 빈값 + 공백만 있는 경우를 허용하지 않는다.
+- @NotNull : null을 허용하지 않는다.
+- @Range(min = 1000, 1000000) : 범위 안의 값이어야한다.
+- @Max(9999) : 최대 9999까지만 허용한다.
+
+
+
+
