@@ -287,5 +287,17 @@ BeanValidator는 바인딩에 실패한 필드는 BeanValidation을 적용하지
 ### @ModelAttribute -> 각각의 필드 타입 변환시도 -> 변환에 성공한 필드만 BeanValidation 적용
 
 
+# /24-11-17
+
+## Bean Validation - 에러 코드
+Bean Validation이 기본으로 제공하는 오류 메시지를 좀 더 자세히 변경하고 싶으면 어떻게 하면 될까?
+
+BeanValidation을 적용하고 bindingResult에 등록된 검증 오류 코드를 보자
+오류 코드가 애노테이션 이름으로 등록된다.
+마치 typeMismatch와 유사하다.
+
+NotBlank라는 오류 코드를 기반으로 MessageCodesResolver를 통해 다양한 메시지 코드가 순서대로 생성된다.
+
+
 
 
