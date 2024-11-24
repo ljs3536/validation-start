@@ -371,3 +371,21 @@ groups 기능을 사용해서 등록과 수정시에 각각 다르게 검증을 
 @ModelAttribute("item")에 item 이름을 넣어준 부분을 주의하자.
 이것을 넣지 않으면 ItemSaveForm의 경우 규칙에 의해 ItemSaveForm이라는 이름으로 MVC Model에 담기게 된다.
 이렇게 되면 뷰 템플릿에서 접근하는 th:object 이름도 함께 변경해주어야한다.
+
+# /24-11-24
+
+## Bean Validation - HTTP 메시지 컨버터
+@Valid, @Validated는 HttpMessageConverter(@RequestBody)에도 적용할 수 있다.
+
+### 참고
+@ModelAttribute는 HTTP요청 파라미터(URL 쿼리 스트링, POST Form)를 다룰 때 사용한다.
+@RequestBody는 HTTP Body의 데이터를 객체로 변환할 때 사용한다. 주로 API JSON 요청을 다룰 때 사용한다.
+
+### @ModelAttribute vs @RequestBody
+HTTP 요청 파라미터를 처리하는 @ModelAttribute는 각각의 필드 단위로 세밀하게 적용된다.
+그래서 특정 필드에 타입이 맞지 않는 오류가 발생해도 나머지 필드는 정상 처리할 수 있었다.
+HttpMessageConverter는 @ModelAttribute와 다르게 각각의 필드 단위로 적용되는 것이 아니라, 전체 객체 단위로 적용된다.
+따라서 메시지 컨버터의 작동이 성공해서 Item 객체를 만들어야 @Valid, @Validated가 적용된다.
+
+- @ModelAttribute는 필드단위로 정교하게 바인딩이 적용된다. 특정 필드가 바인딩 되지 않아도 나머지 필드는 정상 바인딩 되고, Validator를 사용한 검증도 적용할 수 있다.
+- @RequestBody는 HttpMessageConverter 단계에서 JSON 데이터를 객체로 변경하지 못하면 이후 단계 자체가 진행않고 예외가 발생한다. 컨트롤러도 호출되지 않고, Validator도 적용할 수 없다.
